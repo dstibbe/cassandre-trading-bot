@@ -21,9 +21,9 @@ import javax.validation.constraints.NotNull;
 @ConfigurationProperties(prefix = "cassandre.trading.bot.exchange")
 public class ExchangeParameters {
 
-    /** Exchange name. For example : coinbase, kraken, kucoin. */
-    @NotEmpty(message = "Exchange name required, for example : coinbase, kraken, kucoin...")
-    private String name;
+    /** Driver class name. For example : coinbase, kraken, kucoin. */
+    @NotEmpty(message = "Driver class  name required, for example : org.knowm.xchange.coinbasepro.CoinbaseProExchange")
+    private String driverClassName;
 
     /** API username. */
     @NotEmpty(message = "API username required")
@@ -67,7 +67,7 @@ public class ExchangeParameters {
     @Valid
     private Rates rates = new Rates();
 
-    /** Exchange API rate calls. */
+    /** Exchange modes. */
     @Validated
     @Getter
     @Setter
@@ -76,11 +76,11 @@ public class ExchangeParameters {
     public static class Modes {
 
         /** Set it to true to use the sandbox. */
-        @NotNull(message = "Sandbox parameter required, set it to true to use the sandbox")
+        @NotNull(message = "Sandbox parameter required, set it to true to use the exchange sandbox")
         private Boolean sandbox;
 
         /** Set it to true to use the dry mode. */
-        @NotNull(message = "Dry parameter required, set it to true to use the dry mode")
+        @NotNull(message = "Dry parameter required, set it to true to use the dry mode (simulated exchange)")
         private Boolean dry;
 
     }
